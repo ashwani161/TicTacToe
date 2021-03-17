@@ -9,6 +9,7 @@ public class TicTacToe {
 		System.out.println("Welcome to TicTacToe");
 		initializeBoard();
 		chooseMove();
+		playerTurn();
 		displayBoard();
 		selectBoard();
 	}
@@ -90,6 +91,17 @@ public class TicTacToe {
 					System.out.println(" ");
 				}
 		displayBoard();
+	}
+
+	public static boolean playerTurn() {
+		int turn = (int) Math.random()*1+1;
+		if(turn==0) {
+			System.out.println("Your turn first");
+			return true;
+		}else {
+			System.out.println("Computer turn first");
+			return false;
+		}
 	}
 
 }
