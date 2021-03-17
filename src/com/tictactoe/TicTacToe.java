@@ -9,9 +9,11 @@ public class TicTacToe {
 		System.out.println("Welcome to TicTacToe");
 		initializeBoard();
 		chooseMove();
+		displayBoard();
 	}
 
-	public static void initializeBoard() {
+	public static void initializeBoard() 
+	{
 		System.out.println(board[0][0] + "|" + board[0][1] + "|" + board[0][2]);
 		System.out.println("-+-+-");
 		System.out.println(board[1][0] + "|" + board[1][1] + "|" + board[1][2]);
@@ -36,6 +38,18 @@ public class TicTacToe {
 				board[row - 1][col - 1] = Move.toUpperCase().toCharArray()[0];
 		} else {
 			System.out.println("Enter your valid move,either X or O");
+		}
+	}
+
+	public static void displayBoard() {
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board[i].length; j++) {
+				/*
+				 * if (j == board[i].length - 1) System.out.print(board[i][j]); else
+				 */
+				System.out.print(board[i][j] + "   ");
+			}
+			System.out.println();
 		}
 	}
 
