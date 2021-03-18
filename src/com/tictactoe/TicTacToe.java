@@ -26,6 +26,17 @@ public class TicTacToe {
 				System.out.println(board);
 				evaluateGame();
 			}
+			System.out.println("Do you want to play another game? Y or N:");
+			String answer = in.nextLine();
+			if (answer.equalsIgnoreCase("N")) {
+				System.out.println("Exiting the game");
+				sessionEnded = true;
+			} else {
+				board = new Board();
+				System.out.println("Starting a new game");
+				gameEnded = false;
+				player = playerturn();
+			}
 
 		}
 	}
