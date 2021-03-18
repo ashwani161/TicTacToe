@@ -24,7 +24,7 @@ public class TicTacToe {
 				}
 				player = !player;
 				System.out.println(board);
-
+				evaluateGame();
 			}
 
 		}
@@ -62,6 +62,25 @@ public class TicTacToe {
 
 		return bestChild;
 
+	}
+
+	private static void evaluateGame() {
+		GameState gameState = board.getGameState();
+		gameEnded = true;
+		switch (gameState) {
+		case CrossWin:
+			System.out.println("You Won!");
+			break;
+		case CircleWin:
+			System.out.println("Computer Won!");
+			break;
+		case Draw:
+			System.out.println("Draw!");
+			break;
+		default:
+			gameEnded = false;
+			break;
+		}
 	}
 
 	public static Position makeMove() {
@@ -147,6 +166,46 @@ class Board {
 				if (board[x][y] == 'e')
 					retArr.add(new Position(x, y));
 		return retArr;
+	}
+
+	public GameState getGameState() {
+		if (hasWon('x'))
+			return GameState.CrossWin;
+		else if (hasWon('o'))
+			return GameState.CircleWin;
+		else if (getFreePositions().size() == 0)
+			return GameState.Draw;
+		else
+			return GameState.Incomplete;
+	}
+
+	private boolean hasWon(char sign) {
+		int x, y;
+
+		// Check diagonals
+		if (board[0][0] == sign && board[1][1] == sign && board[2][2] == sign)
+			return true;
+		if (board[0][2] == sign && board[1][1] == sign && board[2][0] == sign)
+			return true;
+
+		// Check row
+		for (x = 0; x < 3; x++) {
+			for (y = 0; y < 3; y++)
+				if (board[x][y] != sign)
+					break;
+			if (y == 3)
+				return true;
+		}
+
+		// Check col
+		for (x = 0; x < 3; x++) {
+			for (y = 0; y < 3; y++)
+				if (board[y][x] != sign)
+					break;
+			if (y == 3)
+				return true;
+		}
+		return false;
 	}
 
 	public boolean isMarked(Position position) {
