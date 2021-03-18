@@ -19,6 +19,8 @@ public class TicTacToe {
 				if (player) {
 					position = makeMove();
 					board = new Board(board, position, PlayerSign.Cross);
+				} else {
+					board = computerMove(board);
 				}
 				player = !player;
 				System.out.println(board);
@@ -37,6 +39,28 @@ public class TicTacToe {
 			System.out.println("Computer first");
 			return false;
 		}
+
+	}
+
+	private static Board computerMove(Board board) {
+		ArrayList<Position> positions = board.getFreePositions();
+		Board bestChild = null;
+		for (Position p : positions) {
+			if ((p.getRow() == 0 && p.getColumn() == 0) || p.getRow() == 2 && p.getColumn() == 0
+					|| p.getRow() == 2 && p.getColumn() == 2 || p.getRow() == 0 && p.getColumn() == 2) {
+				return new Board(board, p, PlayerSign.Circle);
+			}
+		}
+		for (Position p : positions) {
+			if ((p.getRow() == 1 && p.getColumn() == 1)) {
+				return bestChild = new Board(board, p, PlayerSign.Circle);
+			}
+		}
+		for (Position p : positions) {
+			return bestChild = new Board(board, p, PlayerSign.Circle);
+		}
+
+		return bestChild;
 
 	}
 
